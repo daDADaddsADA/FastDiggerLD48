@@ -1,0 +1,38 @@
+using System.IO;
+using UnityEngine;
+using System.Runtime.Serialization.Formatters.Binary;
+public static class Saver 
+{
+  public static void Save( CubeDestroy cube)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/cubescore.fun";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        Ss ss = new Ss(cube);
+
+        formatter.Serialize(stream, ss);
+        stream.Close();
+    }
+
+    public static Ss Load()
+    {
+        string path = Application.persistentDataPath + "/cubescore.fun";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+
+           Ss ss = formatter.Deserialize(stream) as Ss;
+            stream.Close();
+            return ss;
+        }
+        else
+        {
+            Debug.LogError("wtf why is there no save file rob");
+            return null;
+        }
+    }
+
+}
