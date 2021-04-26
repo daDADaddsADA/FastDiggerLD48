@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GroundCheck : MonoBehaviour
+{
+    public PlayerMovement move;
+    
+    
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.isStatic == true)
+        {
+            move.GroundCheck = true;
+        }
+            
+           
+                
+                
+     }
+    private void OnCollisionExit(Collision collision)
+    {
+        move.GroundCheck = false;
+    }
+
+}
