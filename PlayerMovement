@@ -1,0 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    public Rigidbody rb;
+    public float Speed;
+    public float Jumpforce = 125;
+   
+    public bool GroundCheck;
+    // Start is called before the first frame update
+    void Start()
+    {
+        rb.drag = 2;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            rb.AddForce(transform.forward * Speed * z);
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            rb.AddForce(transform.right * Speed * x);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            rb.AddForce(transform.right * Speed * x);
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            rb.AddForce(transform.forward * Speed * z);
+        }
+       
+
+        
+        if(GroundCheck == true)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                rb.MovePosition(transform.up * Jumpforce);
+
+            }
+        }
+
+    }
+}
